@@ -3,7 +3,7 @@
 * 桌面右下角的便签，小程序
 
 ## 界面
-![界面](https://raw.githubusercontent.com/hebin123456/note/image/桌面便签/image/screenshot.png)
+![界面](https://github.com/hebin123456/note/tree/master/%E6%A1%8C%E9%9D%A2%E4%BE%BF%E7%AD%BE/image/screenshot.png)
 
 ## 版本更新
 * 2017-11-28
