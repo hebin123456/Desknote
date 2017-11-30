@@ -332,36 +332,76 @@ namespace desknote
         // 加大字体
         private void button1_Click_1(object sender, EventArgs e)
         {
-            FontStyle fontStyle = richTextBox1.SelectionFont.Style;
-            richTextBox1.SelectionFont = new Font("新宋体", richTextBox1.SelectionFont.Size + 1, fontStyle);
+            try
+            {
+                FontStyle fontStyle = richTextBox1.SelectionFont.Style;
+                richTextBox1.SelectionFont = new Font("新宋体", richTextBox1.SelectionFont.Size + 1, fontStyle);
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString());
+                MessageBox.Show("这是个Bug, 可能你设置字体的时候混杂了中英文, 请分开设置.");
+            }
         }
 
         // 减小字体
         private void button2_Click(object sender, EventArgs e)
         {
-            FontStyle fontStyle = richTextBox1.SelectionFont.Style;
-            richTextBox1.SelectionFont = new Font("新宋体", richTextBox1.SelectionFont.Size - 1, fontStyle);
+            try
+            {
+                FontStyle fontStyle = richTextBox1.SelectionFont.Style;
+                richTextBox1.SelectionFont = new Font("新宋体", richTextBox1.SelectionFont.Size - 1, fontStyle);
+            }
+            catch(Exception ex)
+            {
+                //MessageBox.Show(ex.ToString());
+                MessageBox.Show("这是个Bug, 可能你设置字体的时候混杂了中英文, 请分开设置.");
+            }
         }
 
         // 加粗字体
         private void button3_Click(object sender, EventArgs e)
         {
-            FontStyle fontStyle = richTextBox1.SelectionFont.Style;
-            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, fontStyle ^ FontStyle.Bold);
-        }
+            try
+            {
+                FontStyle fontStyle = richTextBox1.SelectionFont.Style;
+                richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, fontStyle ^ FontStyle.Bold);
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString());
+                MessageBox.Show("这是个Bug, 可能你设置字体的时候混杂了中英文, 请分开设置.");
+            }
+}
 
         // 斜体
         private void button4_Click(object sender, EventArgs e)
         {
-            FontStyle fontStyle = richTextBox1.SelectionFont.Style;
-            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, fontStyle ^ FontStyle.Italic);
+            try
+            {
+                FontStyle fontStyle = richTextBox1.SelectionFont.Style;
+                richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, fontStyle ^ FontStyle.Italic);
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString());
+                MessageBox.Show("这是个Bug, 可能你设置字体的时候混杂了中英文, 请分开设置.");
+            }
         }
 
         // 下划线
         private void button5_Click(object sender, EventArgs e)
         {
-            FontStyle fontStyle = richTextBox1.SelectionFont.Style;
-            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, fontStyle ^ FontStyle.Underline);
+            try
+            {
+                FontStyle fontStyle = richTextBox1.SelectionFont.Style;
+                richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, fontStyle ^ FontStyle.Underline);
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString());
+                MessageBox.Show("这是个Bug, 可能你设置字体的时候混杂了中英文, 请分开设置.");
+            }
         }
 
         // 更改颜色
