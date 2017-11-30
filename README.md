@@ -3,7 +3,7 @@
 * 桌面右下角的便签，小程序
 
 ## 界面
-![界面](https://raw.githubusercontent.com/hebin123456/Desknote/blob/master/desknote/image/screenshot.png)
+![界面](https://github.com/hebin123456/Desknote/blob/master/desknote/image/screenshot.png)
 
 ## 版本更新
 * 2017-11-28
