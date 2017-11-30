@@ -164,6 +164,7 @@ namespace desknote
         {
             pictureBox1.BackColor = color1;
             richTextBox1.BackColor = color2;
+            button7.BackColor = color1;
             button1.BackColor = color3;
             button2.BackColor = color3;
             button3.BackColor = color3;
@@ -373,6 +374,12 @@ namespace desknote
                 //GetColor就是用户选择的颜色，接下来就可以使用该颜色了
                 richTextBox1.SelectionColor = GetColor;
             }
+        }
+
+        // 本地备份数据
+        private void button7_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("暂时不支持!");
         }
     }
 }
