@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="desknote.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="header" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-16711808</Value>
+    </Setting>
+    <Setting Name="content" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1828</Value>
+    </Setting>
+    <Setting Name="topmost" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
