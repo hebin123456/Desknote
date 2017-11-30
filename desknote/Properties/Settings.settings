@@ -11,5 +11,11 @@
     <Setting Name="topmost" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="content_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="foot" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-16711808</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

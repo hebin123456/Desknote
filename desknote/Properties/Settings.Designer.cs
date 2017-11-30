@@ -58,5 +58,29 @@ namespace desknote.Properties {
                 this["topmost"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string content_path {
+            get {
+                return ((string)(this["content_path"]));
+            }
+            set {
+                this["content_path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-16711808")]
+        public int foot {
+            get {
+                return ((int)(this["foot"]));
+            }
+            set {
+                this["foot"] = value;
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace desknote
             // 颜色
             try
             {
-                ChangeColor(Color.FromArgb(Properties.Settings.Default.header), Color.FromArgb(Properties.Settings.Default.content));
+                ChangeColor(Color.FromArgb(Properties.Settings.Default.header), Color.FromArgb(Properties.Settings.Default.content), Color.FromArgb(Properties.Settings.Default.foot));
             }
             catch { }
 
@@ -46,6 +47,8 @@ namespace desknote
         private string content_path = "1";
         private void load()
         {
+            content_path = Properties.Settings.Default.content_path;
+
             if (!Directory.Exists("content"))
             {
                 try
@@ -77,7 +80,8 @@ namespace desknote
 
             if (richTextBox1.Text == "")
             {
-                richTextBox1.Text = "欢迎使用桌面小便签\r\n支持粘贴图片，支持拖拽文件\r\n右击可以设置颜色和退出";
+                //richTextBox1.Text = "欢迎使用桌面小便签\r\n支持粘贴图片，支持拖拽文件\r\n右击可以设置颜色和退出";
+                richTextBox1.Rtf = "{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0\\fnil\\fcharset134 \\'d0\\'c2\\'cb\\'ce\\'cc\\'e5;}}{\\colortbl ;\\red255\\green128\\blue192;}\\viewkind4\\uc1\\pard\\lang2052\\f0\\fs36\\'bb\\'b6\\'d3\\'ad\\fs24\\'ca\\'b9\\'d3\\'c3\\ul\\fs30\\'d7\\'c0\\'c3\\'e6\\ulnone\\b\\'d0\\'a1\\'b1\\'e3\\'c7\\'a9\\b0\\par 1.\\'d6\\'a7\\'b3\\'d6\\'d5\\'b3\\'cc\\'f9\\'cd\\'bc\\'c6\\'ac\\'a1\\'a2\\'cd\\'cf\\'d7\\'a7\\'ce\\'c4\\'bc\\'fe\\par 2.\\'d6\\'a7\\'b3\\'d6\\ul\\'d7\\'d4\\'b6\\'a8\\'d2\\'e5\\ulnone\\'d7\\'d6\\'cc\\'e5\\par 3.\\'d6\\'a7\\'b3\\'d6\\'b1\\'ea\\'c7\\'a9\\'d7\\'f3\\'d3\\'d2\\'c7\\'d0\\'bb\\'bb\\par 4.\\'d3\\'d2\\'bb\\'f7\\cf1\\'d3\\'d0\\'be\\'aa\\'cf\\'b2\\cf0\\par}";
             }
 
             // 绑定保存
@@ -99,7 +103,7 @@ namespace desknote
         // 超文本连接
         private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start(e.LinkText);
+            Process.Start(e.LinkText);
         }
 
         private Point mouseOff;//鼠标移动位置变量
@@ -127,7 +131,8 @@ namespace desknote
             if (leftFlag)
             {
                 Point mouseSet = Control.MousePosition;
-                mouseSet.Offset(mouseOff.X, mouseOff.Y);  //设置移动后的位置
+                // 要偏移左panel
+                mouseSet.Offset(mouseOff.X - splitContainer2.Panel1.Width, mouseOff.Y);  //设置移动后的位置
                 Location = mouseSet;
             }
         }
@@ -155,24 +160,16 @@ namespace desknote
             Application.Exit();
         }
 
-        public void ChangeColor(Color color1, Color color2)
+        public void ChangeColor(Color color1, Color color2, Color color3)
         {
             pictureBox1.BackColor = color1;
             richTextBox1.BackColor = color2;
-        }
-
-        public Color get_PicColor()
-        {
-            return pictureBox1.BackColor;
-        }
-        public Color get_TxtColor()
-        {
-            return richTextBox1.BackColor;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(richTextBox1.Rtf);
+            button1.BackColor = color3;
+            button2.BackColor = color3;
+            button3.BackColor = color3;
+            button4.BackColor = color3;
+            button5.BackColor = color3;
+            button6.BackColor = color3;
         }
 
         // 内容变更时
@@ -196,6 +193,8 @@ namespace desknote
         private void changeText_Click(object sender, EventArgs e)
         {
             content_path = sender.ToString().Replace("便签", "");
+            Properties.Settings.Default.content_path = content_path;
+            Properties.Settings.Default.Save();
             // 重载界面
             load();
         }
@@ -234,6 +233,8 @@ namespace desknote
             DirectoryInfo folder = new DirectoryInfo("content");
             int count = folder.GetFiles().Count();
             content_path = (count + 1) + "";
+            Properties.Settings.Default.content_path = content_path;
+            Properties.Settings.Default.Save();
             try
             {
                 StreamWriter sw = new StreamWriter("content/content_" + content_path);
@@ -282,11 +283,96 @@ namespace desknote
                     File.Move("content/content_" + (i + 1), "content/content_" + i);
                 }
                 content_path = "1";
+                Properties.Settings.Default.content_path = "1";
+                Properties.Settings.Default.Save();
             }
             catch(Exception ex) {
                 MessageBox.Show(ex.ToString());
             }
             load();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            int pre = Convert.ToInt32(content_path) - 1;
+            if(File.Exists("content/content_" + pre))
+            {
+                Properties.Settings.Default.content_path = pre + "";
+                Properties.Settings.Default.Save();
+                load();
+            }
+            else
+            {
+                int i = 1;
+                while (File.Exists("content/content_" + i)) i++;
+                Properties.Settings.Default.content_path = (i - 1) + "";
+                Properties.Settings.Default.Save();
+                load();
+            }
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            int next = Convert.ToInt32(content_path) + 1;
+            if (File.Exists("content/content_" + next))
+            {
+                Properties.Settings.Default.content_path = next + "";
+                Properties.Settings.Default.Save();
+                load();
+            }
+            else
+            {
+                Properties.Settings.Default.content_path = "1";
+                Properties.Settings.Default.Save();
+                load();
+            }
+        }
+
+        // 加大字体
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            FontStyle fontStyle = richTextBox1.SelectionFont.Style;
+            richTextBox1.SelectionFont = new Font("新宋体", richTextBox1.SelectionFont.Size + 1, fontStyle);
+        }
+
+        // 减小字体
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FontStyle fontStyle = richTextBox1.SelectionFont.Style;
+            richTextBox1.SelectionFont = new Font("新宋体", richTextBox1.SelectionFont.Size - 1, fontStyle);
+        }
+
+        // 加粗字体
+        private void button3_Click(object sender, EventArgs e)
+        {
+            FontStyle fontStyle = richTextBox1.SelectionFont.Style;
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, fontStyle ^ FontStyle.Bold);
+        }
+
+        // 斜体
+        private void button4_Click(object sender, EventArgs e)
+        {
+            FontStyle fontStyle = richTextBox1.SelectionFont.Style;
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, fontStyle ^ FontStyle.Italic);
+        }
+
+        // 下划线
+        private void button5_Click(object sender, EventArgs e)
+        {
+            FontStyle fontStyle = richTextBox1.SelectionFont.Style;
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, fontStyle ^ FontStyle.Underline);
+        }
+
+        // 更改颜色
+        private void button6_Click(object sender, EventArgs e)
+        {
+            ColorDialog ColorForm = new ColorDialog();
+            if (ColorForm.ShowDialog() == DialogResult.OK)
+            {
+                Color GetColor = ColorForm.Color;
+                //GetColor就是用户选择的颜色，接下来就可以使用该颜色了
+                richTextBox1.SelectionColor = GetColor;
+            }
         }
     }
 }

@@ -14,3 +14,25 @@ C:\Users\以夕阳落款\Documents\GitHub\note - 副本\desknote\obj\Debug\deskn
 C:\Users\以夕阳落款\Documents\GitHub\note - 副本\desknote\obj\Debug\desknote.csproj.CoreCompileInputs.cache
 C:\Users\以夕阳落款\Documents\GitHub\note - 副本\desknote\obj\Debug\desknote.exe
 C:\Users\以夕阳落款\Documents\GitHub\note - 副本\desknote\obj\Debug\desknote.pdb
+C:\Users\以夕阳落款\Documents\GitHub\Desknote - 副本\desknote\bin\Debug\desknote.exe.config
+C:\Users\以夕阳落款\Documents\GitHub\Desknote - 副本\desknote\bin\Debug\desknote.exe
+C:\Users\以夕阳落款\Documents\GitHub\Desknote - 副本\desknote\bin\Debug\desknote.pdb
+C:\Users\以夕阳落款\Documents\GitHub\Desknote - 副本\desknote\obj\Debug\desknote.csprojResolveAssemblyReference.cache
+C:\Users\以夕阳落款\Documents\GitHub\Desknote - 副本\desknote\obj\Debug\desknote.Main.resources
+C:\Users\以夕阳落款\Documents\GitHub\Desknote - 副本\desknote\obj\Debug\desknote.Properties.Resources.resources
+C:\Users\以夕阳落款\Documents\GitHub\Desknote - 副本\desknote\obj\Debug\desknote.Setting.resources
+C:\Users\以夕阳落款\Documents\GitHub\Desknote - 副本\desknote\obj\Debug\desknote.csproj.GenerateResource.Cache
+C:\Users\以夕阳落款\Documents\GitHub\Desknote - 副本\desknote\obj\Debug\desknote.csproj.CoreCompileInputs.cache
+C:\Users\以夕阳落款\Documents\GitHub\Desknote - 副本\desknote\obj\Debug\desknote.exe
+C:\Users\以夕阳落款\Documents\GitHub\Desknote - 副本\desknote\obj\Debug\desknote.pdb
+C:\Users\以夕阳落款\Documents\GitHub\Desknote\desknote\bin\Debug\desknote.exe.config
+C:\Users\以夕阳落款\Documents\GitHub\Desknote\desknote\bin\Debug\desknote.exe
+C:\Users\以夕阳落款\Documents\GitHub\Desknote\desknote\bin\Debug\desknote.pdb
+C:\Users\以夕阳落款\Documents\GitHub\Desknote\desknote\obj\Debug\desknote.csprojResolveAssemblyReference.cache
+C:\Users\以夕阳落款\Documents\GitHub\Desknote\desknote\obj\Debug\desknote.Main.resources
+C:\Users\以夕阳落款\Documents\GitHub\Desknote\desknote\obj\Debug\desknote.Properties.Resources.resources
+C:\Users\以夕阳落款\Documents\GitHub\Desknote\desknote\obj\Debug\desknote.Setting.resources
+C:\Users\以夕阳落款\Documents\GitHub\Desknote\desknote\obj\Debug\desknote.csproj.GenerateResource.Cache
+C:\Users\以夕阳落款\Documents\GitHub\Desknote\desknote\obj\Debug\desknote.csproj.CoreCompileInputs.cache
+C:\Users\以夕阳落款\Documents\GitHub\Desknote\desknote\obj\Debug\desknote.exe
+C:\Users\以夕阳落款\Documents\GitHub\Desknote\desknote\obj\Debug\desknote.pdb
