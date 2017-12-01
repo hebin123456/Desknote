@@ -17,5 +17,8 @@
     <Setting Name="foot" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">-16711808</Value>
     </Setting>
+    <Setting Name="mydocument" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

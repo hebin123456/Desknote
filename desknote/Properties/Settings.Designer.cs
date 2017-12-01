@@ -82,5 +82,17 @@ namespace desknote.Properties {
                 this["foot"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string mydocument {
+            get {
+                return ((string)(this["mydocument"]));
+            }
+            set {
+                this["mydocument"] = value;
+            }
+        }
     }
 }

@@ -5,10 +5,10 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace desknote
@@ -18,6 +18,9 @@ namespace desknote
         public Main()
         {
             InitializeComponent();
+            
+            Properties.Settings.Default.mydocument = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            mydocument = Properties.Settings.Default.mydocument + "\\Hebin\\" + mydocument;
 
             // 位置
             Rectangle rec = Screen.GetWorkingArea(this);
@@ -44,24 +47,25 @@ namespace desknote
             load();
         }
 
+        private string mydocument = "content";
         private string content_path = "1";
         private void load()
         {
             content_path = Properties.Settings.Default.content_path;
 
-            if (!Directory.Exists("content"))
+            if (!Directory.Exists(mydocument))
             {
                 try
                 {
-                    Directory.CreateDirectory("content");
+                    Directory.CreateDirectory(mydocument);
                 }
                 catch { }
             }
-            if (!File.Exists("content/" + "content_1"))
+            if (!File.Exists(mydocument + "\\" + "content_1"))
             {
                 try
                 {
-                    StreamWriter sw = new StreamWriter("content/content_" + content_path);
+                    StreamWriter sw = new StreamWriter(mydocument + "\\content_" + content_path);
                     sw.Write("");
                     sw.Close();
                 }
@@ -72,7 +76,7 @@ namespace desknote
             richTextBox1.TextChanged -= richTextBox1_TextChanged;
             try
             {
-                StreamReader sr = new StreamReader("content/content_" + content_path);
+                StreamReader sr = new StreamReader(mydocument + "\\content_" + content_path);
                 richTextBox1.Rtf = sr.ReadToEnd();
                 sr.Close();
             }
@@ -178,7 +182,7 @@ namespace desknote
         {
             try
             {
-                StreamWriter sw = new StreamWriter("content/content_" + content_path);
+                StreamWriter sw = new StreamWriter(mydocument + "\\content_" + content_path);
                 sw.Write(richTextBox1.Rtf);
                 sw.Close();
             }
@@ -208,7 +212,7 @@ namespace desknote
 
             int i = 1;
             ToolStripMenuItem tool;
-            DirectoryInfo folder = new DirectoryInfo("content");
+            DirectoryInfo folder = new DirectoryInfo(mydocument);
             //遍历文件
             foreach (FileInfo NextFile in folder.GetFiles())
             {
@@ -231,14 +235,14 @@ namespace desknote
         // 新建便签
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            DirectoryInfo folder = new DirectoryInfo("content");
+            DirectoryInfo folder = new DirectoryInfo(mydocument);
             int count = folder.GetFiles().Count();
             content_path = (count + 1) + "";
             Properties.Settings.Default.content_path = content_path;
             Properties.Settings.Default.Save();
             try
             {
-                StreamWriter sw = new StreamWriter("content/content_" + content_path);
+                StreamWriter sw = new StreamWriter(mydocument + "\\content_" + content_path);
                 sw.Write("");
                 sw.Close();
             }
@@ -272,16 +276,16 @@ namespace desknote
         // 删除便签
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            DirectoryInfo folder = new DirectoryInfo("content");
+            DirectoryInfo folder = new DirectoryInfo(mydocument);
             int count = folder.GetFiles().Count();
             try
             {
                 // 删除文件
-                File.Delete("content/content_" + content_path);
+                File.Delete(mydocument + "\\content_" + content_path);
                 int t = Convert.ToInt32(content_path);
                 for(int i = t; i < count; i++)
                 {
-                    File.Move("content/content_" + (i + 1), "content/content_" + i);
+                    File.Move(mydocument + "\\content_" + (i + 1), mydocument + "/content_" + i);
                 }
                 content_path = "1";
                 Properties.Settings.Default.content_path = "1";
@@ -293,10 +297,11 @@ namespace desknote
             load();
         }
 
+        // 前一个
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             int pre = Convert.ToInt32(content_path) - 1;
-            if(File.Exists("content/content_" + pre))
+            if(File.Exists(mydocument + "\\content_" + pre))
             {
                 Properties.Settings.Default.content_path = pre + "";
                 Properties.Settings.Default.Save();
@@ -304,18 +309,20 @@ namespace desknote
             }
             else
             {
-                int i = 1;
-                while (File.Exists("content/content_" + i)) i++;
-                Properties.Settings.Default.content_path = (i - 1) + "";
+                DirectoryInfo folder = new DirectoryInfo(mydocument);
+                int count = 1;
+                if (Directory.Exists(mydocument)) count = folder.GetFiles().Count();
+                Properties.Settings.Default.content_path = count + "";
                 Properties.Settings.Default.Save();
                 load();
             }
         }
 
+        // 后一个
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             int next = Convert.ToInt32(content_path) + 1;
-            if (File.Exists("content/content_" + next))
+            if (File.Exists(mydocument + "\\content_" + next))
             {
                 Properties.Settings.Default.content_path = next + "";
                 Properties.Settings.Default.Save();
@@ -419,7 +426,30 @@ namespace desknote
         // 本地备份数据
         private void button7_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("暂时不支持!");
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "ZIP文件(*.zip)|*.zip";
+            saveFileDialog.FilterIndex = 1;
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if(saveFileDialog.FileName.IndexOf(mydocument) >= 0)
+                {
+                    MessageBox.Show("无法在这里创建备份文件!");
+                }
+                else
+                {
+                    try
+                    {
+                        ZipFile.CreateFromDirectory(mydocument, saveFileDialog.FileName);
+                        MessageBox.Show("备份完成!");
+                    }
+                    catch
+                    {
+                        MessageBox.Show("创建备份文件失败, 请重试!");
+                    }
+                }
+            }
         }
     }
 }
